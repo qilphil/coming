@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= user
+  form(method="post",data-ajax="false")
+    label.ui-hidden-accessible(for="sel_cometime") Ich komme um:
+    select#sel_cometime(name="cometime")
+      - for (var d_hour in hours)
+        option= hours[d_hour]
+    button not coming
+    button send now
