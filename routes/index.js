@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+var config_user = require('./config_user')
 var smtptransport = nodemailer.createTransport("SMTP", {});
 var nowdate = new Date();
 var mail_data = {
@@ -22,6 +23,7 @@ exports.index = function (req, res) {
 	    
         res.render('form', {
             user: req.params.user,
+            userlist: config_user.list,
 			hours: d_hours,
             title: "Coming When?"
         });

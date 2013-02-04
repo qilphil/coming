@@ -1,11 +1,16 @@
 extends layout
 
 block content
-  h1= user
+  h1.usernamehead= user
   form(method="post",data-ajax="false")
     label.ui-hidden-accessible(for="sel_cometime") Ich komme um:
     select#sel_cometime(name="cometime")
-      - for (var d_hour in hours)
-        option= hours[d_hour]
+     each d_hour in hours
+        option= d_hour
+    fieldset(data-role="controlgroup")
+      each email,userID in userlist
+        unless userID == user
+          input.custom(type="checkbox",name="checkbox[#{userID}]",id="checkbox_user_#{userID}",checked)
+          label(for=id="checkbox_user_#{userID}")= userID
     button not coming
     button send now
