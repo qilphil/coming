@@ -10,3 +10,10 @@ a {
 text-align: center;
 
 }
+#chooseusers{
+
+	margin:1em 2em;
+}
+.longslider .ui-slider-switch {
+	width:9em;
+}

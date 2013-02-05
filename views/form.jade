@@ -1,16 +1,42 @@
 extends layout
 
 block content
-  h1.usernamehead= user
-  form(method="post",data-ajax="false")
+  form.ui-body.ui-body-a.ui-corner-all(method="post",data-ajax="false")
+    p Hallo, hier #{user}! Ich komme um:
     label.ui-hidden-accessible(for="sel_cometime") Ich komme um:
     select#sel_cometime(name="cometime")
      each d_hour in hours
         option= d_hour
-    fieldset(data-role="controlgroup")
+    select#sel_more
+      option(value='') more...
+      option Bin beim Kunden
+      option Bin krank. Komme erst wieder am 
+    #morecontain(data-role="fieldcontain")
+      textarea#text_more(name="more")
+    .longslider
+      select#sel_an_wen(data-role="slider")
+        option(value="alle") an Alle
+        option(value="an") an
+    fieldset#chooseusers(data-role="controlgroup")
       each email,userID in userlist
         unless userID == user
           input.custom(type="checkbox",name="checkbox[#{userID}]",id="checkbox_user_#{userID}",checked)
           label(for=id="checkbox_user_#{userID}")= userID
-    button not coming
-    button send now
+    button.ui-btn-up-b Send now!
+
+  script
+    $(function() {
+      $('#text_more').hide();
+      $('#sel_more').change(
+          function(){
+          $('#text_more').html($(this).val()).toggle(!$('#text_more').val()=='');
+          }
+        );
+      $('#chooseusers').hide();
+      $('#sel_an_wen').change(
+        function(){
+          $('#chooseusers').toggle($(this).val()=='an');
+          console.log($(this).val());
+          }
+        );
+      });
