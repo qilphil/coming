@@ -24,7 +24,7 @@ function fixName(testName) {
 exports.index = function (req, res) {
     if (req.params.user) {
         var formdata = {
-            username:fixName(req.params.user),
+            user:fixName(req.params.user),
             userlist: config_user.list,
             d_hours:[]
         }
