@@ -26,11 +26,11 @@ exports.index = function (req, res) {
         var formdata = {
             user:fixName(req.params.user),
             userlist: config_user.list,
-            d_hours:[]
+            hours:[]
         }
 		
         for(var i=9 ; i<18 ; i++)
-    		 formdata.d_hours.push(i+":00",i+":30");
+    		 formdata.hours.push(i+":00",i+":30");
 	    
         res.render('form', formdata);
 
