@@ -20,7 +20,7 @@ block content
     fieldset#chooseusers(data-role="controlgroup")
       each email,userID in userlist
         unless userID == user
-          input.custom(type="checkbox",name="checkbox[#{userID}]",id="checkbox_user_#{userID}",checked)
+          input.custom(type="checkbox",name="sendto[#{userID}]",id="checkbox_user_#{userID}",checked)
           label(for=id="checkbox_user_#{userID}")= userID
     button.ui-btn-up-b Send now!
 
