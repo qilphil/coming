@@ -31,9 +31,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/a/:user', routes.index);
-app.post('/a/:user', routes.send);
+app.get('/', routes.a);
+app.get('/a/:user', routes.a);
+app.post('/a/:user', routes.a);
 app.get('/users', user.list);
 app.get('/email', email.sent);
 
