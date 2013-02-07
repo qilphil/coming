@@ -1,3 +1,5 @@
 extends layout_email
 block content
-  p  #{user} coming on #{cometime}
+  p  #{user} kommt um #{cometime} Uhr
+  if more
+    p= more

@@ -2,9 +2,9 @@
  * GET home page.
  */
 
-var nodemailer = require('nodemailer');
-var config_user = require('./config_user');
-var console = require('console');
+var nodemailer = require('nodemailer'),
+        config_user = require('./config_user'),
+        extend = require('xtend');
 
 var smtptransport = nodemailer.createTransport("SMTP", {});
 var nowdate = new Date();
@@ -41,24 +41,20 @@ exports.a = function(req, res) {
                 hours: []
             };
 
-            for (var i = 9; i < 18; i++)
-                formdata.hours.push(i + ":00", i + ":30");
+            for (var hour = 9; hour < 18; hour++)
+                formdata.hours.push(hour + ":00", hour + ":30");
 
             res.render('form', formdata);
         } else { // POSTED
-            state_data.cometime = req.body.cometime;
-            console.log(req.body);
             var mail_to_list = [];
             for (var send_to in req.body.sendto)
-                mail_to_list.push(config_user.list[send_to]);
-            
-            console.log(mail_to_list);
-            
-            res.render("email", {
-                cometime: state_data.cometime,
-                user: state_data.username},
-            mailer
-                    );
+                if (config_user.list[send_to])
+                    mail_to_list.push(config_user.list[send_to]);
+
+            mail_data.to = mail_to_list.join(',');
+            mail_data.to = "atpunkt@punktat.de"; // remove for production
+
+            res.render("email", extend(req.body, {user: state_data.username}), mailer);
 
             res.render('sent', {
                 cometime: state_data.cometime,
